@@ -13,6 +13,8 @@
 		6400262F223FCEFE00C827B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6400262D223FCEFE00C827B3 /* Main.storyboard */; };
 		64002631223FCF0300C827B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64002630223FCF0300C827B3 /* Assets.xcassets */; };
 		64002634223FCF0300C827B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64002632223FCF0300C827B3 /* LaunchScreen.storyboard */; };
+		6400263E223FD4F500C827B3 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6400263D223FD4F500C827B3 /* DataManager.swift */; };
+		640026402242733900C827B3 /* MovieDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6400263F2242733900C827B3 /* MovieDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		64002630223FCF0300C827B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		64002633223FCF0300C827B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		64002635223FCF0300C827B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6400263D223FD4F500C827B3 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		6400263F2242733900C827B3 /* MovieDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				64002630223FCF0300C827B3 /* Assets.xcassets */,
 				64002632223FCF0300C827B3 /* LaunchScreen.storyboard */,
 				64002635223FCF0300C827B3 /* Info.plist */,
+				6400263D223FD4F500C827B3 /* DataManager.swift */,
+				6400263F2242733900C827B3 /* MovieDataModel.swift */,
 			);
 			path = Abyss;
 			sourceTree = "<group>";
@@ -139,6 +145,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6400262C223FCEFE00C827B3 /* DetailViewController.swift in Sources */,
+				6400263E223FD4F500C827B3 /* DataManager.swift in Sources */,
+				640026402242733900C827B3 /* MovieDataModel.swift in Sources */,
 				6400262A223FCEFE00C827B3 /* MasterViewController.swift in Sources */,
 				64002628223FCEFE00C827B3 /* AppDelegate.swift in Sources */,
 			);
