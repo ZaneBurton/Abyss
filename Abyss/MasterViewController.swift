@@ -14,6 +14,11 @@ class MasterViewController: UITableViewController {
     var objects = [Any]()
     let dataGrabber = DataManager()
 
+    var rebootDataModel: MovieDataModel? {
+        didSet{
+            tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,13 +31,23 @@ class MasterViewController: UITableViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
-        self.title = "Veggies That Talk"
         
-        dataGrabber.getData(completion: { success in
-            self.objects = self.dataGrabber.dataArray
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+        let nav = self.navigationController?.navigationBar
+        // 2
+        nav?.barStyle = UIBarStyle.black
+        nav?.tintColor = UIColor.yellow
+        // 3
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        imageView.contentMode = .scaleAspectFit
+        // 4
+        let image = UIImage(named: "logo")
+        imageView.image = image
+        // 5
+        navigationItem.titleView = imageView
+        
+        
+        dataGrabber.getData(completion: { data in
+            self.rebootDataModel = data
         })
     }
 
@@ -53,9 +68,10 @@ class MasterViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let object = objects[indexPath.row] as! String
+                let selectedObject = rebootDataModel?.franchise[indexPath.section].entries[indexPath.row]
+                //let object = objects[indexPath.row] as! String
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
+                controller.detailItem = selectedObject
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
@@ -65,18 +81,31 @@ class MasterViewController: UITableViewController {
     // MARK: - Table View
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        
+        return ((rebootDataModel?.franchise.count)) ?? 0
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return (rebootDataModel?.franchise[section].franchiseName) ?? "No data yet"
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+        return (rebootDataModel?.franchise[section].entries.count) ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        let mediaName = (rebootDataModel?.franchise[indexPath.section].entries[indexPath.row].name)!
+        cell.textLabel!.text = mediaName
+        
+        let mediaYear = (rebootDataModel?.franchise[indexPath.section].entries[indexPath.row].yearStart)!
+       // cell.detailTextLabel!.text = mediaYear
 
-        let object = objects[indexPath.row] as! String
-        cell.textLabel!.text = object.description
+        //let object = objects[indexPath.row] as! String
+        //cell.textLabel!.text = object.description
+        
         return cell
     }
 

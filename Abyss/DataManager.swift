@@ -11,15 +11,44 @@ import UIKit
 class DataManager: NSObject {
 
     let MYJSONURL = "https://api.myjson.com/bins/1e5uji"
-    var dataArray = ["No data"]
+    var dataModel: MovieDataModel?
     
-    func getData(completion: @escaping (_ success: Bool) -> ()) {
+
+    
+    func getData(completion: @escaping (_ dataModel: MovieDataModel) -> ()) {
         
-        var success = true
         // let urlString = "https://api.myjson.com/bins/cgiym"
         let actualURL = URL(string: MYJSONURL)
-        let session = URLSession.shared
         
+        let dataTask = URLSession.shared.dataTask(with: actualURL!) {(data, response, error) in
+            
+            guard let data = data else {
+                return
+            }
+            
+            print(data.description)
+            
+            do {
+                let decoder = JSONDecoder()
+                let mediaData = try decoder.decode(MovieDataModel.self, from: data)
+                
+                self.dataModel = mediaData
+                
+//                print(self.dataModel)
+                
+            } catch {
+                print("We have error")
+            }
+            
+            DispatchQueue.main.async {
+                completion(self.dataModel!)
+            }
+            
+        }
+        dataTask.resume()
+        //let session = URLSession.shared
+        
+        /*
         let task = session.dataTask(with: actualURL!) { (data, response, error) in
             
             if let _ = data, error == nil {
@@ -35,8 +64,8 @@ class DataManager: NSObject {
                 success = false
             }
             completion(success)
-        }
-        task.resume()
+        }*/
+        //task.resume()
         
     }
     

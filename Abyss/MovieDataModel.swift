@@ -10,23 +10,25 @@ import UIKit
 
 class MovieDataModel: Codable {
     
-    var franchise:[Franchises]
-    
+    var franchise: [Franchise]
 }
 
-class Franchises: Codable {
-    let franchiseName: String
-    let entries: [Entries]
-}
 
-class Entries: Codable {
-    let name: String
-    let format: String
-    let yearStart: String
-    let yearEnd: String?
-    let episodes: Int?
-    let studio: String?
-    let imageUrl: String?
-    let summary: String
-    
-}
+    class Franchise: Codable {
+        let franchiseName: String
+        let entries: [Entry]
+    }
+
+    class Entry: Codable {
+        let name: String
+        let format: String
+        let yearStart: String
+        let yearEnd: String?
+        let episodes: Int?
+        let studio: String?
+        let network: String?
+        let imageURL: String
+        let summary: String
+        let description: String
+        
+    }
